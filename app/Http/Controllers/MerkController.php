@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Merk;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class MerkController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() : View
     {
         $merk = Merk::all();
         return view('merk.index', compact('merk'));
@@ -19,7 +21,7 @@ class MerkController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('merk.input_merk');
     }
@@ -27,7 +29,7 @@ class MerkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
         
         $request->validate([
@@ -44,7 +46,7 @@ class MerkController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Merk  $merk)
+    public function show(Merk  $merk):View
     {
         return View('merk.show',\compact('merk'));
     }
@@ -52,24 +54,32 @@ class MerkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id):View
     {
-        //
+        $merk = Merk::findOrFail($id);
+        return view('merk.edit', compact('merk'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id ):RedirectResponse
     {
-        //
+        
+        $merk = Merk::findOrFail($id);
+        $merk->merk_barang = $request->merk;
+        $merk->save();
+
+        return redirect()->route('merk.index')->with('success', 'Merk updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Merk $merk)
     {
-        //
+        $merk->delete();
+
+        return redirect()->route('merk.index')->with('success', 'Merk deleted successfully.');
     }
 }
