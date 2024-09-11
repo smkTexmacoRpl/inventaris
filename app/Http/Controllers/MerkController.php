@@ -17,6 +17,11 @@ class MerkController extends Controller
         $merk = Merk::all();
         return view('merk.index', compact('merk'));
     }
+    public function beranda() : View
+     {
+        $users = [['id'=>'1', 'nama'=>'Ronin'],['id'=>'2', 'nama'=>'Robin']];
+        return view('home',['users' => $users]);
+    }
 
     /**
      * Show the form for creating a new resource.
