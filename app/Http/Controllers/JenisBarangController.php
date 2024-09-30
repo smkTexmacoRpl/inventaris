@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\JenisBarang;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+
+
 
 class JenisBarangController extends Controller
 {
@@ -22,7 +25,8 @@ class JenisBarangController extends Controller
      */
     public function create():View
     {
-        return view('jenis.input');
+      
+      return view('jenis.input');
     }
 
     /**
@@ -38,7 +42,7 @@ class JenisBarangController extends Controller
                 'jenis_barang' => $request->jenis,
             ]);
                       
-        return redirect()->route('jenis.index')->with('success', 'Jenis barang berhasil ditambahkan');       
+        return redirect()->route('jenis_barang.index')->with('success', 'Jenis barang berhasil ditambahkan');       
 
     }
 
@@ -68,7 +72,7 @@ class JenisBarangController extends Controller
         $jenis->jenis_barang = $request->jenis;
         $jenis->save();
 
-        return redirect()->route('jenis.index')->with('success', 'Jenis updated successfully.');
+        return redirect()->route('jenis_barang.index')->with('success', 'Jenis updated successfully.');
     }
 
     /**
@@ -79,7 +83,7 @@ class JenisBarangController extends Controller
     
         $jenis= JenisBarang::findOrFail($id);
         $jenis->delete();
-        return redirect()->route('jenis.index')->with('success', 'Jenis deleted successfully.');
+        return redirect()->route('jenis_barang.index')->with('success', 'Jenis deleted successfully.');
 
     }
 }

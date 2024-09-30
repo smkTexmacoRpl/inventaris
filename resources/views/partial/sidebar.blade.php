@@ -14,15 +14,21 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-profile.html">
+                <a class="sidebar-link" href="{{ URL('/jenis_barang') }}">
                     <i class="align-middle" data-feather="book"></i> <span class="align-middle">Type Barang</span>
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-profile.html">
+                <a class="sidebar-link" href="{{ URL('/lokasi') }}">
                     <i class="align-middle" data-feather="map-pin"></i> <span class="align-middle">Lokasi</span>
                 </a>
             </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ URL('/barang') }}">
+                    <i class="align-middle" data-feather="database"></i> <span class="align-middle">Barang</span>
+                </a>
+            </li>
+
 
 
             <li class="sidebar-header">
