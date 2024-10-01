@@ -1,7 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.apps')
 
 @section('content')
-    <div>
-        {{ $merk->merk_barang }}
+    <div class="card">
+        <div class="card-body">
+            {{ $merk->merk_barang }}
+        </div>
     </div>
 @endsection()
