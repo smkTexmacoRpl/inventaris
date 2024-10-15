@@ -9,4 +9,8 @@ class Merk extends Model
 {
     use HasFactory;
     protected $fillable = ['merk_barang'];
+    public function barangs()
+    {
+        return $this->hasMany('App\Models\Barang');
+    }
 }

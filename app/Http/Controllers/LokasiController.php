@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-// use Intervention\Image\Drivers\Imagick\Driver;
+
 
 class LokasiController extends Controller
 {
@@ -51,17 +51,20 @@ class LokasiController extends Controller
           $thumbImage = $manager->read('gambar/'.$imageName);
           $thumbImage->resize(200, 200);
           $thumbImage->save(public_path('gambar/thumbnails/'.$imageName));
+          $lokasi = new Lokasi;
+          $lokasi->kode = $request->kode;
+          $lokasi->nama_lokasi = $request->lokasi;
+          $lokasi->gambar_lokasi =$imageName;
+          $lokasi->keterangan = $request->keterangan;
+          $lokasi->save();
         }
-       
-        // $imageName = time().'-'.'lokasi'.'.'.$request->gambar->extension();
-        // $request->gambar->move(public_path('gambar'), $imageName);
-
-        $lokasi = new Lokasi;
-        $lokasi->kode = $request->kode;
-        $lokasi->nama_lokasi = $request->lokasi;
-        $lokasi->gambar_lokasi =$imageName;
-        $lokasi->keterangan = $request->keterangan;
-        $lokasi->save();
+        else{
+          $lokasi = new Lokasi;
+          $lokasi->kode = $request->kode;
+          $lokasi->nama_lokasi = $request->lokasi;
+          $lokasi->keterangan = $request->keterangan;
+          $lokasi->save();
+        }        
         return redirect()->route('lokasi.index')->with('success', 'Lokasi berhasil ditambahkan');
     }
 
@@ -95,14 +98,21 @@ class LokasiController extends Controller
             'keterangan' => 'nullable|string|min:5',
         ]);
         if ($request->gambar) {
-            $gambar_path = \public_path($lokasi->gambar_lokasi);
-            if (file_exists($gambar_path)) {
+            $gambar_path = \public_path('gambar/'.$lokasi->gambar_lokasi);
+            $gambar_path1= \public_path('gambar/thumbnails/'.$lokasi->gambar_lokasi);
+            if (file_exists($gambar_path))    {
                 unlink($gambar_path);
-            } 
-            
+                if(file_exists($gambar_path1))
+                unlink($gambar_path1);
+            }
             $imageName = time().'-'.'lokasi'.'.'.$request->gambar->extension();
             $request->gambar->move(public_path('gambar'), $imageName);
-            $lokasi->gambar_lokasi ='gambar/'. $imageName;
+
+            $manager = new ImageManager(new Driver());
+            $thumbImage = $manager->read('gambar/'.$imageName);
+            $thumbImage->resize(200, 200);
+            $thumbImage->save(public_path('gambar/thumbnails/'.$imageName));
+            $lokasi->gambar_lokasi =$imageName;
         }
         $lokasi->kode = $request->kode;
         $lokasi->nama_lokasi = $request->lokasi;

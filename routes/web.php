@@ -27,4 +27,4 @@ Route::get('/tentangkami', function () {
 Route::resource('/merk',MerkController::class );
 Route::resource('/jenis_barang',JenisBarangController::class, );
 Route::resource('/lokasi',LokasiController::class, );
-Route::resource('/barang',BarangController::class, );
+Route::resource('/barangs',BarangController::class, );

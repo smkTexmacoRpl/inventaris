@@ -9,4 +9,8 @@ class Lokasi extends Model
 {
     use HasFactory;
     protected $fillable = ['kode','nama_lokasi','gambar_lokasi','keterangan'];
+    public function barangs() 
+    {
+        return $this->hasMany('App\Models\Barang');
+    }
 }

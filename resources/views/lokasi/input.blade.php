@@ -57,13 +57,11 @@
                                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                 </div>
                             </div>
+                        </form>
                     </div>
                 </div>
-
-
-                </form>
             </div>
         </div>
     </div>
-    </div>
+
 @endsection()

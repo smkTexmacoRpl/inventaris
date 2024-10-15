@@ -24,7 +24,7 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ URL('/barang') }}">
+                <a class="sidebar-link" href="{{ URL('/barangs') }}">
                     <i class="align-middle" data-feather="database"></i> <span class="align-middle">Barang</span>
                 </a>
             </li>

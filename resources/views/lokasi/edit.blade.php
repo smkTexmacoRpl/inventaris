@@ -15,9 +15,7 @@
                             </ul>
                         </div>
                     @endif
-
                     <div class="mb-3">
-
                         <form action="{{ route('lokasi.update', $lokasi->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -62,8 +60,6 @@
                             </div>
                     </div>
                 </div>
-
-
                 </form>
             </div>
         </div>

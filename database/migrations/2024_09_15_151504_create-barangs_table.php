@@ -20,6 +20,7 @@ return new class extends Migration
         $table->foreignId('lokasi_id')->constrained('lokasis')->cascadeOnDelete();
         $table->integer('jumlah_barang')->nullable();
         $table->integer('harga')->nullable();
+        $table->string('gambar_barang')->nullable();
         $table->string('keterangan')->nullable();
         $table->timestamps();
     });
